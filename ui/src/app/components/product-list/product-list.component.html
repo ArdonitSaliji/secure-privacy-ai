@@ -1,0 +1,27 @@
+<div class='container'>
+    <section class="search-section">
+        <h1 class="title">Product Search</h1>
+        <div class="search-box">
+          <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="Search for products..." 
+            [(ngModel)]="searchTerm"
+            (keyup)="onSearch()"
+          >
+        </div>
+      </section>
+    
+
+    <section class="product-list">
+        <ng-container *ngIf="(products$ | async)!.length > 0; else noProducts">
+            <app-product-card 
+                *ngFor="let product of products$ | async" 
+                [product]="product">
+            </app-product-card>
+        </ng-container>
+        <ng-template #noProducts>
+            <p>No products found.</p>
+        </ng-template>
+    </section>
+</div>
